@@ -137,54 +137,62 @@ function submitHandler(event) {
 }
 
 
-const calcElement = document.getElementById('calculator');
-if (calcElement) {
-    const resultElement = document.getElementById('result');
-    const inputs = calcElement.querySelectorAll('input');
-    const inputsNumber = [];
-    const sum = {};
+class Calculator {
 
-    Array.from(inputs).forEach(input => {
-        if (input.type === 'number') {
-            inputsNumber.push(input)
+    constructor(selector, operation) {
+        this.selector = selector
+        this.operation = operation
+    }
+
+    plus(a, b) {
+        return a + b
+    }
+
+    minus(a, b) {
+        return a - b
+    }
+
+    calucate() {
+        const element = document.getElementById(this.selector)
+        if (!element) {
+            throw new Error('Element not found!')
         }
-    });
-
-    if (inputsNumber.length) {
-        inputsNumber.forEach((input, idx) => {
-            input.onkeyup = function (event) {
-                console.log(event)
-                const value = event.currentTarget.value
-                sum[idx] = value
-                const result = Object.values(sum).map(i => +i).reduce((a, b) => a + b)
-                resultElement.value = result;
+        const innerElement = element.querySelector('.result')
+        const inputs = element.querySelectorAll('input')
+        const inputsNumber = [];
+        const sum = {};
+    
+        Array.from(inputs).forEach(input => {
+            if (input.type === 'number') {
+                inputsNumber.push(input)
             }
-        })
+        });
+    
+        if (inputsNumber.length) {
+            inputsNumber.forEach((input, idx) => {
+                input.onkeyup = event => {
+                    const value = event.currentTarget.value
+                    sum[idx] = value
+                    const result = Object.values(sum).map(i => +i).reduce((a, b) => {
+                        switch (this.operation) {
+                            case '+':
+                                return this.plus(a, b)
+                                break;
+                            case '-':
+                                return this.minus(a, b)
+                                break;
+                            default: throw new Error('Operand not found')
+                        }
+                    })
+                    innerElement.value = result;
+                }
+            })
+        }
     }
 }
 
+const calc1 = new Calculator('calculator', '+')
+const calc2 = new Calculator('calculator2', '-')
 
-const calcElement2 = document.getElementById('calculator2');
-if (calcElement2) {
-    const resultElement = document.getElementById('result2');
-    const inputs = calcElement2.querySelectorAll('input');
-    const inputsNumber = [];
-    const sum = {};
-
-    Array.from(inputs).forEach(input => {
-        if (input.tupe === 'number') {
-            inputsNumber.push(input)
-        }
-    });
-
-    if (inputsNumber.length) {
-        inputsNumber.forEach((input, idx) => {
-            input.onkeyup = function (event) {
-                const value = event.currentTarget.value
-                sum[idx] = value
-                const result = Object.values(sum).map(i => +i).reduce((c, d) => c - d)
-                resultElement.value = result2
-            }
-        })
-    }
-}
+calc1.calucate()
+calc2.calucate()
