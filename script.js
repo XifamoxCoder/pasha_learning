@@ -162,3 +162,29 @@ if (calcElement) {
         })
     }
 }
+
+
+const calcElement2 = document.getElementById('calculator2');
+if (calcElement2) {
+    const resultElement = document.getElementById('result2');
+    const inputs = calcElement2.querySelectorAll('input');
+    const inputsNumber = [];
+    const sum = {};
+
+    Array.from(inputs).forEach(input => {
+        if (input.tupe === 'number') {
+            inputsNumber.push(input)
+        }
+    });
+
+    if (inputsNumber.length) {
+        inputsNumber.forEach((input, idx) => {
+            input.onkeyup = function (event) {
+                const value = event.currentTarget.value
+                sum[idx] = value
+                const result = Object.values(sum).map(i => +i).reduce((c, d) => c - d)
+                resultElement.value = result2
+            }
+        })
+    }
+}
