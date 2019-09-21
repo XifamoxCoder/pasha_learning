@@ -151,6 +151,14 @@ class Calculator {
     minus(a, b) {
         return a - b
     }
+    
+    delenie(a, b) {
+        return a / b
+    }
+
+    ymnozhinie(a, b) {
+        return a * b
+    }
 
     calucate() {
         const element = document.getElementById(this.selector)
@@ -181,6 +189,12 @@ class Calculator {
                             case '-':
                                 return this.minus(a, b)
                                 break;
+                            case '/':
+                                return this.delenie(a, b)
+                                break;
+                            case '*':
+                                return this.ymnozhinie(a, b)
+                                break;
                             default: throw new Error('Operand not found')
                         }
                     })
@@ -193,6 +207,10 @@ class Calculator {
 
 const calc1 = new Calculator('calculator', '+')
 const calc2 = new Calculator('calculator2', '-')
+const calc3 = new Calculator('calculator3', '/')
+const calc4 = new Calculator('calculator4', '*')
 
 calc1.calucate()
 calc2.calucate()
+calc3.calucate()
+calc4.calucate()
