@@ -139,9 +139,10 @@ function submitHandler(event) {
 
 class Calculator {
 
-    constructor(selector, operation) {
+    constructor(selector, operation, fieldsCount) {
         this.selector = selector
         this.operation = operation
+        this.fields = fieldsCount
     }
 
     plus(a, b) {
@@ -160,11 +161,44 @@ class Calculator {
         return a * b
     }
 
+    builder(element = null) {
+        let el = element
+        if (!element) {
+            el = document.getElementById(this.selector)
+        }
+        if (!el) {
+            throw new Error('Element not found!')
+        }
+
+        el.classList.add('calc-block')
+
+        if (this.fields < 2) {
+            throw new Error('Calculator cannot building. Needed fieldCount props more 2')
+        }
+
+        for (let i = 0; i < this.fields; i++) {
+            const input = document.createElement('input')
+            input.classList.add('form-control', 'calc-field')
+            input.type = 'number'
+
+            const span = document.createElement('span')
+            span.innerHTML = this.operation
+            el.append(input)
+            el.append(span)
+        }
+        el.lastElementChild.innerHTML = '='
+        const resultInput = document.createElement('input')
+        resultInput.classList.add('form-control', 'calc-field', 'result')
+        resultInput.disabled = true
+        el.append(resultInput)
+    }
+
     calucate() {
         const element = document.getElementById(this.selector)
         if (!element) {
             throw new Error('Element not found!')
         }
+        this.builder(element)
         const innerElement = element.querySelector('.result')
         const inputs = element.querySelectorAll('input')
         const inputsNumber = [];
@@ -205,10 +239,10 @@ class Calculator {
     }
 }
 
-const calc1 = new Calculator('calculator', '+')
-const calc2 = new Calculator('calculator2', '-')
-const calc3 = new Calculator('calculator3', '/')
-const calc4 = new Calculator('calculator4', '*')
+const calc1 = new Calculator('calculator', '+', 5)
+const calc2 = new Calculator('calculator2', '-', 2)
+const calc3 = new Calculator('calculator3', '/', 2)
+const calc4 = new Calculator('calculator4', '*', 2)
 
 calc1.calucate()
 calc2.calucate()
