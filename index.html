@@ -1,0 +1,63 @@
+<!DOCTYP    E html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="block-1">
+                <a href="/">
+                    <img src="https://vk.com/images/svg_icons/ic_head_logo.svg" alt="">
+                </a>
+            </div>
+            <div class="block-2">
+                <input type="search" placeholder="Поиск">
+            </div>
+            <div class="block-3">icons</div>
+            <div class="block-4">profile</div>
+        </div>
+    </header>
+    <main class="main">
+        <aside class="aside"></aside>
+        <div class="content">
+            <button class="btn btn-primary" id="button">Кликни меня</button>
+            <div id="click">0</div>
+
+            <hr>
+            <div class="alert alert-success" role="alert" style="visibility: hidden; opacity: 0;">
+                People was added!
+            </div>
+            <form action="" onsubmit="submitHandler(event)">
+                <input type="text" name="name" class="form-control" placeholder="Введите имя">
+                <input type="number" name="year" class="form-control" placeholder="Введите год рождения">
+                <input type="number" name="money" class="form-control" placeholder="Введите сколько зарабатываете в месяц">
+                <button type="submit" class="btn btn-secondary">Add People</button>
+            </form>
+            <div id="getPeople">
+                ... No more
+            </div>
+        </div>
+
+    </main>
+    <footer>
+        
+    </footer>
+    <script>
+    const button = document.getElementById('button');
+    button.onclick = function() {
+        const counter = document.getElementById('click');
+        let number = +counter.innerHTML;
+        number++; 
+        counter.innerHTML = number;
+    }
+    </script>
+</body>
+</html>
