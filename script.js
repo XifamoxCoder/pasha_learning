@@ -1,6 +1,6 @@
 // String
 
-// Nubmer
+// Number
 
 // Boolean
 
@@ -25,10 +25,10 @@ variable = 'none'
 
 const a = 1;
 const b = 5;
-
+*/
 let result;
 
- const name = 'Игнат';
+const name = 'Игнат';
 const isBalcon = false;
 const isRoom = false;
 const isKitchen = false;
@@ -42,7 +42,7 @@ if (isBalcon) {
 } else {
     result = name + ' нигде не ссал'
 }
-*/
+
 
 /*
 const name = prompt('Как тебя зовут?')
@@ -55,6 +55,10 @@ const cost = money * 12
 
 alert(`Тебя зовут: ${name}. Тебе ${age}. В год ты зарабатываешь ${cost}`)
 */
+
+function sum(a, b) {
+    return a + b;
+}
 
 function minus(a, b) {
     return a - b
@@ -130,4 +134,31 @@ function submitHandler(event) {
         alertMsg.style.visibility = 'hidden';
         alertMsg.style.opacity = '0';
     }, 2500)
+}
+
+
+const calcElement = document.getElementById('calculator');
+if (calcElement) {
+    const resultElement = document.getElementById('result');
+    const inputs = calcElement.querySelectorAll('input');
+    const inputsNumber = [];
+    const sum = {};
+
+    Array.from(inputs).forEach(input => {
+        if (input.type === 'number') {
+            inputsNumber.push(input)
+        }
+    });
+
+    if (inputsNumber.length) {
+        inputsNumber.forEach((input, idx) => {
+            input.onkeyup = function (event) {
+                console.log(event)
+                const value = event.currentTarget.value
+                sum[idx] = value
+                const result = Object.values(sum).map(i => +i).reduce((a, b) => a + b)
+                resultElement.value = result;
+            }
+        })
+    }
 }
