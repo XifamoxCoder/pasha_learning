@@ -248,3 +248,29 @@ calc1.calucate()
 calc2.calucate()
 calc3.calucate()
 calc4.calucate()
+
+
+
+// То самое задание про iqTest
+function iqTest(numbers){
+    numbers = numbers.split(' ').map(i => parseInt(i))
+
+    const odd = numbers.filter(i => i % 2 === 1)
+    const even = numbers.filter(i => i % 2 === 0)
+    return odd.length < even.length ? numbers.indexOf(odd[0]) + 1 : numbers.indexOf(even[0]) + 1
+}
+
+// console.log(iqTest("2 4 7 8 10")) // 3
+// console.log(iqTest("1 2 2")) // 1
+function validatePIN (pin) {
+    const array = pin.split('');
+
+    if (array.length === 4 || array.length === 6) {
+        if (isNaN(Number(array.join('')))) return false
+        if (Math.sign(Math.floor(array.join(''))) < 0) return false
+        return true
+    }
+    return false
+}
+
+console.log(validatePIN('1234'))
